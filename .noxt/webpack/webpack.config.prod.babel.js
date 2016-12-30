@@ -48,6 +48,16 @@ export default {
             'transform-react-constant-elements',
             'transform-react-remove-prop-types',
             'transform-react-pure-class-to-function',
+            ["module-resolver", {
+              "root": ["./src"],
+              "alias": {
+                "components": "./src/app/components",
+                "containers": "./src/app/containers",
+                "pages": "./src/app/pages",
+                "utils": "./src/app/utils",
+                "styles": "./src/app/styles"
+              }
+            }]
           ],
         },
       },

@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 
-import App from 'app/pages/App'
-import Homepage from 'app/pages/Homepage'
+import App from 'pages/App'
+import Homepage from 'pages/Homepage'
 
 export default function getRoutes() {
   return (

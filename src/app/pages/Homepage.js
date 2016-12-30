@@ -1,7 +1,7 @@
 import React from 'react';
 import CSSModules from 'react-css-modules'
 
-import styles from 'app/styles/pages/Homepage.scss'
+import styles from 'styles/pages/Homepage.scss'
 
 @CSSModules(styles)
 class Homepage extends React.Component {

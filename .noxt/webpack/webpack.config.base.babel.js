@@ -23,10 +23,6 @@ export default {
       '.json',
       '.js',
     ],
-    modules: [
-      path.join(process.cwd(), 'src'),
-      path.join(process.cwd(), 'node_modules'),
-    ],
   },
 
   plugins: [],
