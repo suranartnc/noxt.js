@@ -9,6 +9,7 @@ export default {
       'react',
       'react-dom',
       'react-router',
+      'react-router-scroll',
     ],
   },
 
