@@ -10,7 +10,7 @@ export default {
   ...webpackBaseConfig,
 
   entry: [
-    path.join(process.cwd(), 'src/app/styles/app.scss'),
+    path.join(process.cwd(), 'src/app/styles/global/app.scss'),
     path.join(process.cwd(), 'src/app/app.prod.js'),
   ],
 
@@ -44,6 +44,7 @@ export default {
           ],
           plugins: [
             'lodash',
+            'transform-decorators-legacy',
             'transform-react-constant-elements',
             'transform-react-remove-prop-types',
             'transform-react-pure-class-to-function',

@@ -15,7 +15,7 @@ export default {
   entry: [
     'react-hot-loader/patch',
     `webpack-hot-middleware/client?path=http://${config.host}:${config.wdsPort}/__webpack_hmr`,
-    path.join(process.cwd(), 'src/app/styles/app.scss'),
+    path.join(process.cwd(), 'src/app/styles/global/app.scss'),
     path.join(process.cwd(), 'src/app/app.dev.js'),
   ],
 
