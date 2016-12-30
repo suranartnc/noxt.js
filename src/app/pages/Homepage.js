@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import CSSModules from 'react-css-modules'
 
-function Homepage() {
-  return (
-    <div>Homepage</div>
-  )
+import styles from 'app/styles/pages/Homepage.scss'
+
+@CSSModules(styles)
+class Homepage extends React.Component {
+  render() {
+    return (
+      <div styleName="container">Homepage</div>
+    )
+  }
 }
 
 export default Homepage
