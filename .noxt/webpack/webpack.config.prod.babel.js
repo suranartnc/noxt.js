@@ -10,7 +10,7 @@ export default {
   ...webpackBaseConfig,
 
   entry: [
-    // path.join(process.cwd(), 'src/shared/theme/styles/app.scss'),
+    path.join(process.cwd(), 'src/app/styles/app.scss'),
     path.join(process.cwd(), 'src/app/app.prod.js'),
   ],
 
