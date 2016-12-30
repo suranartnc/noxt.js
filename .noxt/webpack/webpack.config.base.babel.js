@@ -2,7 +2,7 @@ import path from 'path'
 
 export default {
   output: {
-    path: path.join(__dirname, 'static', 'build'),
+    path: path.join(process.cwd(), 'static', 'build'),
   },
 
   module: {
@@ -24,8 +24,8 @@ export default {
       '.js',
     ],
     modules: [
-      path.join(__dirname, 'src'),
-      path.join(__dirname, 'node_modules'),
+      path.join(process.cwd(), 'src'),
+      path.join(process.cwd(), 'node_modules'),
     ],
   },
 

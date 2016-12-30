@@ -1,22 +1,13 @@
 import React from 'react'
-import { render } from 'react-dom'
-import { AppContainer } from 'react-hot-loader'
+import { Route, IndexRoute } from 'react-router'
 
-import Root from './Root'
+import App from 'app/pages/App'
+import Homepage from 'app/pages/Homepage'
 
-const mountNode = document.getElementById('root')
-
-render(<AppContainer><Root /></AppContainer>, mountNode)
-
-if (module.hot) {
-  module.hot.accept('./Root', () => {
-    const NextRootApp = require('./Root').default
-
-    render(
-      <AppContainer>
-        <NextRootApp />
-      </AppContainer>,
-      mountNode
-    )
-  })
+export default function getRoutes() {
+  return (
+    <Route path="/" component={App}>
+      <IndexRoute component={Homepage} />
+    </Route>
+  )
 }

@@ -7,7 +7,7 @@ module.exports = {
     apiHost: 'localhost',
     apiPort: 3002,
     wsPort: 8080,
-    mongoConnectionString: 'mongodb://localhost:27017/urrsk',
+    // mongoConnectionString: 'mongodb://localhost:27017/noxtjs',
   },
   production: {
     isProduction: true,
@@ -16,6 +16,6 @@ module.exports = {
     apiHost: process.env.APIHOST || 'localhost',
     apiPort: process.env.APIPORT || 3002,
     wsPort: 8080,
-    mongoConnectionString: 'mongodb://localhost:27017/urrsk',
+    // mongoConnectionString: 'mongodb://localhost:27017/noxtjs',
   },
 }[process.env.NODE_ENV || 'development']

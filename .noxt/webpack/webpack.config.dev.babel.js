@@ -2,9 +2,9 @@ import path from 'path'
 import webpack from 'webpack'
 import DashboardPlugin from 'webpack-dashboard/plugin'
 import webpackBaseConfig from './webpack.config.base.babel'
-import config from './src/shared/configs/index'
+import config from 'config'
 
-const projectSource = path.resolve(__dirname, './src')
+const projectSource = path.resolve(process.cwd(), './src')
 
 export default {
   ...webpackBaseConfig,
@@ -15,8 +15,8 @@ export default {
   entry: [
     'react-hot-loader/patch',
     `webpack-hot-middleware/client?path=http://${config.host}:${config.wdsPort}/__webpack_hmr`,
-    path.join(__dirname, 'src/shared/theme/styles/app.scss'),
-    path.join(__dirname, 'src/client/client.dev.js'),
+    // path.join(process.cwd(), 'src/app/styles/app.scss'),
+    path.join(process.cwd(), 'src/app/app.dev.js'),
   ],
 
   output: {
@@ -64,7 +64,7 @@ export default {
             loader: 'sass-loader',
             options: {
               sourceMap: true,
-              includePaths: [path.join(__dirname, 'src/shared/theme/styles')],
+              includePaths: [path.join(process.cwd(), 'src/app/styles')],
             },
           },
         ],

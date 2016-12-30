@@ -8,9 +8,8 @@ import webpackHotMiddleware from 'webpack-hot-middleware'
 
 import cors from 'cors'
 
-import config from 'shared/configs'
-import webpackConfig from '../../webpack.config.dev.babel.js'
-
+import config from 'config'
+import webpackConfig from '../../.noxt/webpack/webpack.config.dev.babel.js'
 
 const app = express()
 

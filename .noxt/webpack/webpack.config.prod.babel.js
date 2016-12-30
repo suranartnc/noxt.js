@@ -10,8 +10,8 @@ export default {
   ...webpackBaseConfig,
 
   entry: [
-    path.join(__dirname, 'src/shared/theme/styles/app.scss'),
-    path.join(__dirname, 'src/client/client.prod.js'),
+    // path.join(process.cwd(), 'src/shared/theme/styles/app.scss'),
+    path.join(process.cwd(), 'src/app/app.prod.js'),
   ],
 
   output: {
@@ -77,7 +77,7 @@ export default {
             {
               loader: 'sass-loader',
               query: {
-                includePaths: [path.join(__dirname, 'src/shared/theme/styles')],
+                includePaths: [path.join(process.cwd(), 'src/app/styles')],
               },
             },
           ],
@@ -108,7 +108,7 @@ export default {
     }),
     new AssetsPlugin({
       filename: 'assets.json',
-      path: path.join(__dirname, 'static'),
+      path: path.join(process.cwd(), 'static'),
       prettyPrint: true,
     }),
     new ExtractTextPlugin({
@@ -118,7 +118,7 @@ export default {
     new webpack.LoaderOptionsPlugin({
       test: /\.scss$/,
       options: {
-        context: __dirname,
+        context: process.cwd(),
         postcss: [
           autoprefixer({ browsers: ['last 2 versions', 'IE > 10'] }),
         ],
