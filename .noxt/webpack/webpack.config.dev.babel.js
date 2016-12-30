@@ -87,9 +87,9 @@ export default {
       },
     }),
     new DashboardPlugin(),
-    // new webpack.DllReferencePlugin({
-    //   context: process.cwd(),
-    //   manifest: require('./static/build/react-manifest.json'),
-    // }),
+    new webpack.DllReferencePlugin({
+      context: process.cwd(),
+      manifest: require('../../static/build/react-manifest.json'),
+    }),
   ],
 }
