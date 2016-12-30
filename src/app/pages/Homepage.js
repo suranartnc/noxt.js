@@ -1,9 +1,12 @@
 import React from 'react'
+import CSSModules from 'react-css-modules'
+
+import styles from './Homepage.scss'
 
 function Homepage() {
   return (
-    <div>Homepage</div>
+    <div styleName="container">Homepage</div>
   )
 }
 
-export default Homepage
+export default CSSModules(Homepage, styles)
