@@ -4,8 +4,6 @@ import DashboardPlugin from 'webpack-dashboard/plugin'
 import webpackBaseConfig from './webpack.config.base.babel'
 import config from '../config'
 
-const projectSource = path.resolve(process.cwd(), './src')
-
 export default {
   ...webpackBaseConfig,
 
@@ -32,7 +30,6 @@ export default {
       ...webpackBaseConfig.module.rules,
       {
         test: /\.js$/,
-        include: projectSource,
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
@@ -40,7 +37,6 @@ export default {
       },
       {
         test: /\.css$/,
-        include: projectSource,
         use: [
           'style-loader',
           'css-loader',
@@ -48,7 +44,6 @@ export default {
       },
       {
         test: /\.scss$/,
-        include: projectSource,
         use: [
           'style-loader',
           {
