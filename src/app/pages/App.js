@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-function App(props) {
+function App (props) {
   return (
     <div>
       { props.children }
@@ -9,7 +9,7 @@ function App(props) {
 }
 
 App.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node
 }
 
 export default App

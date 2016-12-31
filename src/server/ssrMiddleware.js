@@ -9,7 +9,7 @@ const wdsPath = `http://${config.host}:${config.wdsPort}/build/`
 const serverPath = `http://${config.host}:${config.port}/`
 const assetsManifest = process.env.webpackAssets && JSON.parse(process.env.webpackAssets)
 
-function renderPage(content) {
+function renderPage (content) {
   return `
     <!doctype html>
     <html lang="en">
@@ -35,7 +35,7 @@ export default function (req, res) {
   const routes = getRoutes()
   match({
     location: req.originalUrl,
-    routes,
+    routes
   }, (error, redirectLocation, renderProps) => {
     if (error) {
       res.status(500).send(error.message)

@@ -9,7 +9,7 @@ export default (client, history, initialState) => {
     authMiddleware,
     uiMiddleware,
     routerMiddleware(history),
-    client.middleware(),
+    client.middleware()
   ]
 
   let enhancer = applyMiddleware(...middlewares)
