@@ -16,13 +16,13 @@
     },
     "betterScripts": {
         "dev-ssr": {
-            "command": "node .",
+            "command": "node ./.noxt/ssr-server",
             "env": {
                 "NODE_ENV": "development"
             }
         },
         "dev-hmr": {
-            "command": "node ./dev-server",
+            "command": "node ./.noxt/dev-server",
             "env": {
                 "NODE_ENV": "development"
             }
@@ -34,7 +34,7 @@
             }
         },
         "start-ssr": {
-            "command": "node .",
+            "command": "node ./.noxt/ssr-server",
             "env": {
                 "NODE_ENV": "production",
                 "BABEL_DISABLE_CACHE": 1

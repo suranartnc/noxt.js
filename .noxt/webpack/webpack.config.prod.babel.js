@@ -11,7 +11,7 @@ export default {
 
   entry: [
     path.join(process.cwd(), 'src/app/styles/global/app.scss'),
-    path.join(process.cwd(), 'src/app/app.prod.js'),
+    path.join(process.cwd(), '.noxt/app/app.prod.js'),
   ],
 
   output: {
