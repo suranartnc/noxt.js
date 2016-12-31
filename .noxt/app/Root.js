@@ -2,7 +2,7 @@ import React from 'react'
 import { Router, browserHistory, applyRouterMiddleware } from 'react-router'
 import useScroll from 'react-router-scroll/lib/useScroll'
 
-import getRoutes from 'app/routes'
+import getRoutes from './routes'
 
 const routes = getRoutes()
 

@@ -2,8 +2,8 @@ import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { RouterContext, match } from 'react-router'
 import 'isomorphic-fetch'
-import getRoutes from 'app/routes'
-import config from 'config'
+import getRoutes from '../app/routes'
+import config from '../config'
 
 const wdsPath = `http://${config.host}:${config.wdsPort}/build/`
 const serverPath = `http://${config.host}:${config.port}/`

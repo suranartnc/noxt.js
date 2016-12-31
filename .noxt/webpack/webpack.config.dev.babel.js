@@ -2,9 +2,7 @@ import path from 'path'
 import webpack from 'webpack'
 import DashboardPlugin from 'webpack-dashboard/plugin'
 import webpackBaseConfig from './webpack.config.base.babel'
-import config from 'config'
-
-const projectSource = path.resolve(process.cwd(), './src')
+import config from '../config'
 
 export default {
   ...webpackBaseConfig,
@@ -16,7 +14,7 @@ export default {
     'react-hot-loader/patch',
     `webpack-hot-middleware/client?path=http://${config.host}:${config.wdsPort}/__webpack_hmr`,
     path.join(process.cwd(), 'src/app/styles/global/app.scss'),
-    path.join(process.cwd(), 'src/app/app.dev.js'),
+    path.join(process.cwd(), '.noxt/app/app.dev.js'),
   ],
 
   output: {
@@ -32,7 +30,6 @@ export default {
       ...webpackBaseConfig.module.rules,
       {
         test: /\.js$/,
-        include: projectSource,
         loader: 'babel-loader',
         options: {
           cacheDirectory: true,
@@ -40,7 +37,6 @@ export default {
       },
       {
         test: /\.css$/,
-        include: projectSource,
         use: [
           'style-loader',
           'css-loader',
@@ -48,7 +44,6 @@ export default {
       },
       {
         test: /\.scss$/,
-        include: projectSource,
         use: [
           'style-loader',
           {
@@ -87,9 +82,9 @@ export default {
       },
     }),
     new DashboardPlugin(),
-    new webpack.DllReferencePlugin({
-      context: process.cwd(),
-      manifest: require('../../static/build/react-manifest.json'),
-    }),
+    // new webpack.DllReferencePlugin({
+    //   context: process.cwd(),
+    //   manifest: require('../../static/build/react-manifest.json'),
+    // }),
   ],
 }
