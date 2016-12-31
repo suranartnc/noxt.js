@@ -1,11 +1,11 @@
-import React from 'react';
+import React from 'react'
 import CSSModules from 'react-css-modules'
 
 import styles from 'styles/pages/Homepage.scss'
 
 @CSSModules(styles)
 class Homepage extends React.Component {
-  render() {
+  render () {
     return (
       <div styleName="container">Homepage</div>
     )
