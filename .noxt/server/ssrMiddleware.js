@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server'
 import { RouterContext, match } from 'react-router'
 import 'isomorphic-fetch'
 import getRoutes from '../app/routes'
+import prefetch from 'noxt/server/prefetch'
 import config from '../config'
 
 const wdsPath = `http://${config.host}:${config.wdsPort}/build/`
@@ -42,12 +43,15 @@ export default function (req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps && renderProps.components) {
-      const component = (
-        <RouterContext {...renderProps} />
-      )
-      const content = renderToString(component)
-      const html = renderPage(content)
-      res.status(200).send(html)
+      prefetch(renderProps.components, renderProps.params)
+        .then(() => {
+          const content = renderToString(
+            <RouterContext {...renderProps} />
+          )
+          const html = renderPage(content)
+          res.status(200).send(html)
+        })
+        .catch(e => console.log(e))
     } else {
       res.status(404).send('Not found')
     }
