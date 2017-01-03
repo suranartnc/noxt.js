@@ -51,6 +51,7 @@ export default {
             ["module-resolver", {
               "root": ["./src"],
               "alias": {
+                "noxt": "./.noxt/",
                 "components": "./src/app/components",
                 "containers": "./src/app/containers",
                 "pages": "./src/app/pages",
