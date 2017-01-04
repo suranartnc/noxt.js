@@ -13,7 +13,7 @@ const wdsPath = `http://${config.host}:${config.wdsPort}/build/`
 const serverPath = `http://${config.host}:${config.port}/`
 const assetsManifest = process.env.webpackAssets && JSON.parse(process.env.webpackAssets)
 
-function renderPage (content) {
+function renderPage (content, initialState) {
   return `
     <!doctype html>
     <html lang="en">
@@ -25,6 +25,9 @@ function renderPage (content) {
       </head>
       <body>
         <div id="root">${content}</div>
+        <script>
+          window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
+        </script>
         <script src="${serverPath}build/vendor-react.js"></script>
         ${process.env.NODE_ENV === 'production'
           ? `<script src="${assetsManifest.main.js}"></script>`
@@ -49,12 +52,13 @@ export default function (req, res) {
     } else if (renderProps && renderProps.components) {
       prefetch(store.dispatch, renderProps.components, renderProps.params)
         .then(() => {
+          const initialState = store.getState()
           const content = renderToString(
             <Provider store={store}>
               <RouterContext {...renderProps} />
             </Provider>
           )
-          const html = renderPage(content)
+          const html = renderPage(content, initialState)
           res.status(200).send(html)
         })
         .catch(e => console.log(e))
