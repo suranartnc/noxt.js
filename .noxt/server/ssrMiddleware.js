@@ -50,6 +50,7 @@ export default function (req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps && renderProps.components) {
+      const routeStatus = renderProps.routes.reduce((prev, cur) => cur.status || prev, null) || 200
       prefetch(store.dispatch, renderProps.components, renderProps.params)
         .then(() => {
           const initialState = store.getState()
@@ -59,9 +60,9 @@ export default function (req, res) {
             </Provider>
           )
           const html = renderPage(content, initialState)
-          res.status(200).send(html)
+          res.status(routeStatus).send(html)
         })
-        .catch(e => console.log(e))
+        .catch(e => res.status(500).send(e.message))
     } else {
       res.status(404).send('Not found')
     }
