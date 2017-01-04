@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import CSSModules from 'react-css-modules'
 
 import withData from 'hocs/withData'
@@ -19,7 +19,7 @@ const fetchData2 = () => new Promise((resolve, reject) => {
 
 @withData([fetchData1, fetchData2])
 @CSSModules(styles)
-class HomePage extends React.Component {
+class HomePage extends Component {
   render () {
     return (
       <div styleName="container">HomePage</div>
