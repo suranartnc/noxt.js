@@ -1,11 +1,20 @@
 import React, {Component} from 'react'
+import {connect} from 'react-redux'
 
 function withData (actions = []) {
-  return (ComposeComponent) => class extends Component {
-    static prefetchData = actions
-    render () {
-      return <ComposeComponent {...this.props} />
+  function mapStateToProps (state) {
+    return {
+      xxx: 1234
     }
+  }
+  return (ComposeComponent) => {
+    class ComponentWithData extends Component {
+      static prefetchData = actions
+      render () {
+        return <ComposeComponent {...this.props} />
+      }
+    }
+    return connect(mapStateToProps)(ComponentWithData)
   }
 }
 

@@ -6,6 +6,9 @@ import getRoutes from '../app/routes'
 import prefetch from 'noxt/server/prefetch'
 import config from '../config'
 
+import createStore from 'app/redux/createStore'
+import { Provider } from 'react-redux'
+
 const wdsPath = `http://${config.host}:${config.wdsPort}/build/`
 const serverPath = `http://${config.host}:${config.port}/`
 const assetsManifest = process.env.webpackAssets && JSON.parse(process.env.webpackAssets)
@@ -33,6 +36,7 @@ function renderPage (content) {
 }
 
 export default function (req, res) {
+  const store = createStore()
   const routes = getRoutes()
   match({
     location: req.originalUrl,
@@ -43,13 +47,12 @@ export default function (req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps && renderProps.components) {
-      prefetch(renderProps.components, renderProps.params)
-        .then((result) => {
-          renderProps.params.data = result.reduce((prev, current) => {
-            return Object.assign(prev, current)
-          }, {})
+      prefetch(store.dispatch, renderProps.components, renderProps.params)
+        .then(() => {
           const content = renderToString(
-            <RouterContext {...renderProps} />
+            <Provider store={store}>
+              <RouterContext {...renderProps} />
+            </Provider>
           )
           const html = renderPage(content)
           res.status(200).send(html)

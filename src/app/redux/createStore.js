@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import rootReducer from 'shared/reducers'
+import rootReducer from 'app/redux/reducer'
 import { routerMiddleware } from 'react-router-redux'
 
 export default (history, initialState) => {
@@ -13,11 +13,11 @@ export default (history, initialState) => {
     enhancer = compose(enhancer, window.devToolsExtension())
   }
 
-  const store = createStore(rootReducer(), initialState, enhancer)
+  const store = createStore(rootReducer, initialState, enhancer)
 
   if (module.hot) {
-    module.hot.accept('app/redux/reducer', () => {
-      const nextReducer = require('app/redux/reducer').default
+    module.hot.accept('./reducer', () => {
+      const nextReducer = require('./reducer').default
       store.replaceReducer(nextReducer)
     })
   }
