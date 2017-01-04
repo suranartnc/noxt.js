@@ -17,6 +17,7 @@ const fetchData2 = () => new Promise((resolve, reject) => {
   }), 5000)
 })
 
+@withData([fetchData1, fetchData2])
 @CSSModules(styles)
 class HomePage extends React.Component {
   render () {
@@ -26,4 +27,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default withData([fetchData1, fetchData2])(HomePage)
+export default HomePage
