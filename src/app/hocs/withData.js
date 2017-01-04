@@ -1,10 +1,7 @@
 import React, {Component, PropTypes} from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-function withData (actions = []) {
-  function mapStateToProps ({ post }) {
-    return { post }
-  }
+function withData (mapStateToProps = null, actions = []) {
   return (ComposeComponent) => {
     class ComponentWithData extends Component {
       static prefetchData = actions
