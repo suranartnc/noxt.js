@@ -6,7 +6,7 @@ import getRoutes from '../app/routes'
 import prefetch from 'noxt/server/prefetch'
 import config from '../config'
 
-import createStore from 'app/redux/createStore'
+import createStore from 'noxt/app/redux/createStore'
 import { Provider } from 'react-redux'
 
 const wdsPath = `http://${config.host}:${config.wdsPort}/build/`
