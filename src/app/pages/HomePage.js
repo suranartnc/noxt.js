@@ -1,6 +1,8 @@
 import React from 'react'
 import CSSModules from 'react-css-modules'
 
+import withData from 'hocs/withData'
+
 import styles from 'styles/pages/Homepage.scss'
 
 const fetchData1 = () => new Promise((resolve, reject) => {
@@ -17,10 +19,6 @@ const fetchData2 = () => new Promise((resolve, reject) => {
 
 @CSSModules(styles)
 class HomePage extends React.Component {
-  static prefetchData = [
-    fetchData1,
-    fetchData2
-  ]
   render () {
     return (
       <div styleName="container">HomePage</div>
@@ -28,4 +26,4 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage
+export default withData([fetchData1, fetchData2])(HomePage)
