@@ -44,7 +44,10 @@ export default function (req, res) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps && renderProps.components) {
       prefetch(renderProps.components, renderProps.params)
-        .then(() => {
+        .then((result) => {
+          renderProps.params.data = result.reduce((prev, current) => {
+            return Object.assign(prev, current)
+          }, {})
           const content = renderToString(
             <RouterContext {...renderProps} />
           )

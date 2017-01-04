@@ -7,6 +7,8 @@ export default function(components, params) {
   // return Promise.all(needs.map(need => dispatch(need(params))));
   return Promise.all(needs.map(need => {
     return need(params)
-      .then(res => console.log('prefetched data: ', res))
+      .then(res => {
+        return res
+      })
   }))
 }
