@@ -53,7 +53,7 @@ export default {
               "alias": {
                 "noxt": "./.noxt/",
                 "components": "./src/app/components",
-                "containers": "./src/app/containers",
+                "hocs": "./src/app/hocs",
                 "pages": "./src/app/pages",
                 "utils": "./src/app/utils",
                 "styles": "./src/app/styles"
