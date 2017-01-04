@@ -2,7 +2,7 @@ import React from 'react'
 import { Router, browserHistory, applyRouterMiddleware } from 'react-router'
 import useScroll from 'react-router-scroll/lib/useScroll'
 
-import getRoutes from './routes'
+import getRoutes from 'noxt/app/routes'
 
 const routes = getRoutes()
 

@@ -9,7 +9,6 @@ import getCustomRoutes from 'app/routes'
 export default function getRoutes () {
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={Homepage} />
       {getCustomRoutes()}
     </Route>
   )
