@@ -6,11 +6,14 @@ import getRoutes from '../app/routes'
 import prefetch from 'noxt/server/prefetch'
 import config from '../config'
 
+import createStore from 'app/redux/createStore'
+import { Provider } from 'react-redux'
+
 const wdsPath = `http://${config.host}:${config.wdsPort}/build/`
 const serverPath = `http://${config.host}:${config.port}/`
 const assetsManifest = process.env.webpackAssets && JSON.parse(process.env.webpackAssets)
 
-function renderPage (content) {
+function renderPage (content, initialState) {
   return `
     <!doctype html>
     <html lang="en">
@@ -22,6 +25,9 @@ function renderPage (content) {
       </head>
       <body>
         <div id="root">${content}</div>
+        <script>
+          window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
+        </script>
         <script src="${serverPath}build/vendor-react.js"></script>
         ${process.env.NODE_ENV === 'production'
           ? `<script src="${assetsManifest.main.js}"></script>`
@@ -33,6 +39,7 @@ function renderPage (content) {
 }
 
 export default function (req, res) {
+  const store = createStore()
   const routes = getRoutes()
   match({
     location: req.originalUrl,
@@ -43,12 +50,15 @@ export default function (req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps && renderProps.components) {
-      prefetch(renderProps.components, renderProps.params)
+      prefetch(store.dispatch, renderProps.components, renderProps.params)
         .then(() => {
+          const initialState = store.getState()
           const content = renderToString(
-            <RouterContext {...renderProps} />
+            <Provider store={store}>
+              <RouterContext {...renderProps} />
+            </Provider>
           )
-          const html = renderPage(content)
+          const html = renderPage(content, initialState)
           res.status(200).send(html)
         })
         .catch(e => console.log(e))

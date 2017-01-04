@@ -1,11 +1,23 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
+import { connect } from 'react-redux'
 
-function withData (actions = []) {
-  return (ComposeComponent) => class extends Component {
-    static prefetchData = actions
-    render () {
-      return <ComposeComponent {...this.props} />
+function withData (mapStateToProps = null, actions = []) {
+  return (ComposeComponent) => {
+    class ComponentWithData extends Component {
+      static prefetchData = actions
+      componentDidMount () {
+        actions.forEach((action) => {
+          this.props.dispatch(action())
+        })
+      }
+      render () {
+        return <ComposeComponent {...this.props} />
+      }
     }
+    ComponentWithData.propTypes = {
+      dispatch: PropTypes.func.isRequired
+    }
+    return connect(mapStateToProps)(ComponentWithData)
   }
 }
 
