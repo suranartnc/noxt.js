@@ -11,20 +11,20 @@ import {fetchData1, fetchData2} from 'app/redux/modules/post/postActions'
 @CSSModules(styles)
 class HomePage extends Component {
   render () {
-    const { xxx } = this.props
+    const { post } = this.props
     return (
       <div styleName="container">
         HomePage
-        <p>{xxx}</p>
+        <p>{post.login}</p>
       </div>
     )
   }
 }
 
-// HomePage.propTypes = {
-//   params: PropTypes.shape({
-//     data: PropTypes.object.isRequired
-//   })
-// }
+HomePage.propTypes = {
+  post: PropTypes.shape({
+    login: PropTypes.string.isRequired
+  })
+}
 
 export default HomePage
