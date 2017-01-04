@@ -4,7 +4,7 @@ import useScroll from 'react-router-scroll/lib/useScroll'
 
 import { Provider } from 'react-redux'
 import getRoutes from 'noxt/app/routes'
-import createStore from 'app/redux/createStore'
+import createStore from 'noxt/app/redux/createStore'
 
 const routes = getRoutes()
 const initialState = window.__INITIAL_STATE__
