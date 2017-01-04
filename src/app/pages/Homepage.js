@@ -3,16 +3,23 @@ import CSSModules from 'react-css-modules'
 
 import styles from 'styles/pages/Homepage.scss'
 
+const fetchData1 = () => new Promise((resolve, reject) => {
+  setTimeout(() => resolve({
+    data: 'aaa'
+  }), 3000)
+})
+
+const fetchData2 = () => new Promise((resolve, reject) => {
+  setTimeout(() => resolve({
+    data: 'bbb'
+  }), 5000)
+})
+
 @CSSModules(styles)
 class Homepage extends React.Component {
   static prefetchData = [
-    () => new Promise((resolve, reject) => {
-      setTimeout(() => {
-        return resolve({
-          data: 'aaa'
-        })
-      }, 5000)
-    })
+    fetchData1,
+    fetchData2
   ]
   render () {
     return (
