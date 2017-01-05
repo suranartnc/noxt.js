@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import { connect } from 'react-redux'
-import { resetError } from 'modules/error/errorActions'
+
+import { resetError } from 'noxt/app/redux/modules/error/errorActions'
 
 function withPage () {
   return (ComposeComponent) => {
