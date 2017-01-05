@@ -30,7 +30,7 @@ HomePage.propTypes = {
     login: PropTypes.string.isRequired
   }),
   error: PropTypes.shape({
-    status: PropTypes.number.isRequired,
+    status: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired
   })
 }

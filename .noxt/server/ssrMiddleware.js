@@ -57,6 +57,11 @@ export default function (req, res) {
           const initialState = store.getState()
           if (initialState.error !== false) {
             routeStatus = initialState.error.status
+          } else if (routeStatus !== 200) {
+            initialState.error = {
+              status: '404',
+              message: 'Not Found'
+            }
           }
           const content = renderToString(
             <Provider store={store}>

@@ -12,12 +12,12 @@ class ErrorPage extends Component {
 }
 
 ErrorPage.defaultProps = {
-  status: 404,
+  status: '404',
   message: 'Not Found'
 }
 
 ErrorPage.propTypes = {
-  status: PropTypes.number,
+  status: PropTypes.string,
   message: PropTypes.string
 }
 
