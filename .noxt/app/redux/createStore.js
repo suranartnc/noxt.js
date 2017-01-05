@@ -1,12 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import { browserHistory } from 'react-router'
 import { routerMiddleware } from 'react-router-redux'
 
 import apiMiddleware from './middlewares/apiMiddleware'
 import rootReducer from './reducer'
 
-export default (history, initialState) => {
-  const middlewares = [
-    routerMiddleware(history),
+export default (initialState = {}) => {
+  let middlewares = [
+    routerMiddleware(browserHistory),
     apiMiddleware
   ]
 

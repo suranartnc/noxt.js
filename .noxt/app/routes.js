@@ -7,7 +7,7 @@ import ErrorPage from 'noxt/app/pages/ErrorPage'
 
 import getCustomRoutes from 'app/routes'
 
-export default function getRoutes () {
+export default function getRoutes (store) {
   return (
     <Route path="/" component={App}>
       {getCustomRoutes()}

@@ -41,7 +41,7 @@ function renderPage (content, initialState = {}) {
 
 export default function (req, res) {
   const store = createStore()
-  const routes = getRoutes()
+  const routes = getRoutes(store)
   match({
     location: req.originalUrl,
     routes
