@@ -142,5 +142,5 @@ export default {
       manifest: require('../../static/build/react-manifest.json'),
     }),
     new ProgressBarPlugin(),
-  ],
+  ]
 }

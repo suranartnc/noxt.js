@@ -85,4 +85,8 @@ export default {
       manifest: require('../../static/build/react-manifest.json'),
     }),
   ],
+
+  performance: {
+    hints: false
+  }
 }
