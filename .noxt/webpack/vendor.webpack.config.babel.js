@@ -9,6 +9,7 @@ export default {
       'react',
       'react-css-modules',
       'react-dom',
+      'react-helmet',
       'react-redux',
       'react-router',
       'react-router-redux',

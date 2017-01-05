@@ -1,4 +1,5 @@
 import React from 'react'
+import Helmet from 'react-helmet'
 import { renderToString } from 'react-dom/server'
 import { RouterContext, match } from 'react-router'
 import 'isomorphic-fetch'
@@ -15,13 +16,16 @@ const serverPath = `http://${config.host}:${config.port}/`
 const assetsManifest = process.env.webpackAssets && JSON.parse(process.env.webpackAssets)
 
 function renderPage (content, initialState = {}) {
+  const head = Helmet.rewind()
   return `
     <!doctype html>
-    <html lang="en">
+    <html ${head.htmlAttributes.toString()}>
       <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Noxt.js</title>
+        ${head.title.toString()}
+        ${head.meta.toString()}
+        ${head.link.toString()}
         ${process.env.NODE_ENV === 'production' ? `<link rel="stylesheet" href="${assetsManifest.main.css}" />` : ''}
       </head>
       <body>
