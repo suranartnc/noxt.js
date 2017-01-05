@@ -1,6 +1,5 @@
 import path from 'path'
 import webpack from 'webpack'
-import DashboardPlugin from 'webpack-dashboard/plugin'
 import webpackBaseConfig from './webpack.config.base.babel'
 import config from '../config'
 
@@ -81,7 +80,6 @@ export default {
         BROWSER: JSON.stringify(true),
       },
     }),
-    new DashboardPlugin(),
     new webpack.DllReferencePlugin({
       context: process.cwd(),
       manifest: require('../../static/build/react-manifest.json'),
