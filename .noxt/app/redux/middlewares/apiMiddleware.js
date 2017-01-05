@@ -11,7 +11,7 @@ function callApi (url, options) {
         const { status, statusText } = response
         return Promise.reject({
           status,
-          statusText
+          message: statusText
         })
       }
       return json

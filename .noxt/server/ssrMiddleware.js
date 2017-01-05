@@ -51,17 +51,12 @@ export default function (req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps && renderProps.components) {
-      const routeStatus = renderProps.routes.reduce((prev, cur) => cur.status || prev, null) || 200
+      let routeStatus = renderProps.routes.reduce((prev, cur) => cur.status || prev, null) || 200
       prefetch(store.dispatch, renderProps.components, renderProps.params)
         .then(() => {
-          // page found
           const initialState = store.getState()
           if (initialState.error !== false) {
-            const { status, message } = initialState.error
-            return Promise.reject({
-              status,
-              message
-            })
+            routeStatus = initialState.error.status
           }
           const content = renderToString(
             <Provider store={store}>
@@ -70,16 +65,8 @@ export default function (req, res) {
           )
           const html = renderPage(content, initialState)
           res.status(routeStatus).send(html)
-        }, (e) => {
-          // page found, but some errors
-          const content = renderToString(
-            <ErrorPage status={e.status} message={e.message} />
-          )
-          const html = renderPage(content)
-          res.status(e.status).send(html)
         })
         .catch((e) => {
-          // something went wrong
           const content = renderToString(
             <ErrorPage status={e.status} message={e.message} />
           )
