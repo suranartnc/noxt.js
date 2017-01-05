@@ -8,12 +8,13 @@ import config from '../config'
 
 import createStore from 'noxt/app/redux/createStore'
 import { Provider } from 'react-redux'
+import ErrorPage from 'noxt/app/pages/ErrorPage'
 
 const wdsPath = `http://${config.host}:${config.wdsPort}/build/`
 const serverPath = `http://${config.host}:${config.port}/`
 const assetsManifest = process.env.webpackAssets && JSON.parse(process.env.webpackAssets)
 
-function renderPage (content, initialState) {
+function renderPage (content, initialState = {}) {
   return `
     <!doctype html>
     <html lang="en">
@@ -40,7 +41,7 @@ function renderPage (content, initialState) {
 
 export default function (req, res) {
   const store = createStore()
-  const routes = getRoutes()
+  const routes = getRoutes(store)
   match({
     location: req.originalUrl,
     routes
@@ -50,10 +51,18 @@ export default function (req, res) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps && renderProps.components) {
-      const routeStatus = renderProps.routes.reduce((prev, cur) => cur.status || prev, null) || 200
+      let routeStatus = renderProps.routes.reduce((prev, cur) => cur.status || prev, null) || 200
       prefetch(store.dispatch, renderProps.components, renderProps.params)
         .then(() => {
           const initialState = store.getState()
+          if (initialState.error !== false) {
+            routeStatus = initialState.error.status
+          } else if (routeStatus !== 200) {
+            initialState.error = {
+              status: '404',
+              message: 'Not Found'
+            }
+          }
           const content = renderToString(
             <Provider store={store}>
               <RouterContext {...renderProps} />
@@ -62,7 +71,13 @@ export default function (req, res) {
           const html = renderPage(content, initialState)
           res.status(routeStatus).send(html)
         })
-        .catch(e => res.status(500).send(e.message))
+        .catch((e) => {
+          const content = renderToString(
+            <ErrorPage status={e.status} message={e.message} />
+          )
+          const html = renderPage(content)
+          res.status(e.status).send(html)
+        })
     } else {
       res.status(404).send('Not found')
     }

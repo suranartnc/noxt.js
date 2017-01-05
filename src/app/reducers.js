@@ -1,4 +1,4 @@
-import postReducer from 'app/modules/post/postReducer'
+import postReducer from 'modules/post/postReducer'
 
 export default {
   post: postReducer
