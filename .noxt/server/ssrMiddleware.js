@@ -8,12 +8,13 @@ import config from '../config'
 
 import createStore from 'noxt/app/redux/createStore'
 import { Provider } from 'react-redux'
+import ErrorPage from 'noxt/app/pages/ErrorPage'
 
 const wdsPath = `http://${config.host}:${config.wdsPort}/build/`
 const serverPath = `http://${config.host}:${config.port}/`
 const assetsManifest = process.env.webpackAssets && JSON.parse(process.env.webpackAssets)
 
-function renderPage (content, initialState) {
+function renderPage (content, initialState = {}) {
   return `
     <!doctype html>
     <html lang="en">
@@ -53,7 +54,15 @@ export default function (req, res) {
       const routeStatus = renderProps.routes.reduce((prev, cur) => cur.status || prev, null) || 200
       prefetch(store.dispatch, renderProps.components, renderProps.params)
         .then(() => {
+          // page found
           const initialState = store.getState()
+          if (initialState.error !== false) {
+            const { status, message } = initialState.error
+            return Promise.reject({
+              status,
+              message
+            })
+          }
           const content = renderToString(
             <Provider store={store}>
               <RouterContext {...renderProps} />
@@ -61,8 +70,22 @@ export default function (req, res) {
           )
           const html = renderPage(content, initialState)
           res.status(routeStatus).send(html)
+        }, (e) => {
+          // page found, but some errors
+          const content = renderToString(
+            <ErrorPage status={e.status} message={e.message} />
+          )
+          const html = renderPage(content)
+          res.status(e.status).send(html)
         })
-        .catch(e => res.status(500).send(e.message))
+        .catch((e) => {
+          // something went wrong
+          const content = renderToString(
+            <ErrorPage status={e.status} message={e.message} />
+          )
+          const html = renderPage(content)
+          res.status(e.status).send(html)
+        })
     } else {
       res.status(404).send('Not found')
     }

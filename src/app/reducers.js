@@ -1,5 +1,7 @@
-import postReducer from 'app/modules/post/postReducer'
+import postReducer from 'modules/post/postReducer'
+import errorReducer from 'modules/error/errorReducer'
 
 export default {
-  post: postReducer
+  post: postReducer,
+  error: errorReducer
 }

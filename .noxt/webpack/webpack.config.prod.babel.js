@@ -54,9 +54,10 @@ export default {
                 "noxt": "./.noxt/",
                 "components": "./src/app/components",
                 "hocs": "./src/app/hocs",
+                "modules": "./src/app/modules",
                 "pages": "./src/app/pages",
-                "utils": "./src/app/utils",
-                "styles": "./src/app/styles"
+                "styles": "./src/app/styles",
+                "utils": "./src/app/utils"
               }
             }]
           ],

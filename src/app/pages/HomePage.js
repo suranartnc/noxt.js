@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react'
 import CSSModules from 'react-css-modules'
 
 import withData from 'hocs/withData'
-import { fetchData1, fetchData2 } from 'app/modules/post/postActions'
+import { fetchData1, fetchData2 } from 'modules/post/postActions'
 
 import styles from 'styles/pages/Homepage.scss'
 
