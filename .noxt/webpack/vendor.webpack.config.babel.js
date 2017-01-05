@@ -7,9 +7,13 @@ export default {
       'es6-promise',
       'isomorphic-fetch',
       'react',
+      'react-css-modules',
       'react-dom',
+      'react-redux',
       'react-router',
+      'react-router-redux',
       'react-router-scroll',
+      'redux'
     ],
   },
 
